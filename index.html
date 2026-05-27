@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Code Crafter</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+
+  <div class="top-right-bar">
+      <div class="notification-btn" id="notiBtn">
+          <div class="noti-badge"></div>
+          <svg class='line' viewBox='0 0 24 24'>
+              <path d='M12 6.43994V9.76994'></path>
+              <path d='M12.02 2C8.34002 2 5.36002 4.98 5.36002 8.66V10.76C5.36002 11.44 5.08002 12.46 4.73002 13.04L3.46002 15.16C2.68002 16.47 3.22002 17.93 4.66002 18.41C9.44002 20 14.61 20 19.39 18.41C20.74 17.96 21.32 16.38 20.59 15.16L19.32 13.04C18.97 12.46 18.69 11.43 18.69 10.76V8.66C18.68 5 15.68 2 12.02 2Z'></path>
+              <path d='M15.33 18.8201C15.33 20.6501 13.83 22.1501 12 22.1501C11.09 22.1501 10.25 21.7701 9.65004 21.1701C9.05004 20.5701 8.67004 19.7301 8.67004 18.8201'></path>
+          </svg>
+      </div>
+      <div class="notification-box" id="notiBox" data-i18n="welcome">এই অ্যাপে আপনকে স্বাগতম</div>
+  </div>
+
+  <div class="workspace">
+      
+      <div id="editorScreen" class="app-screen active">
+          <div class="canvas-area">
+              <p data-i18n="canvas">এখানে ডিজাইন তৈরি করুন...</p>
+          </div>
+      </div>
+
+      <div id="toolsScreen" class="app-screen">
+          <div class="tools-header">
+              <h2 data-i18n="toolsListTitle">সব টুলস</h2>
+              <p data-i18n="toolsListDesc">আপনার প্রোজেক্টের জন্য প্রয়োজনীয় টুল নির্বাচন করুন</p>
+          </div>
+          
+          <div class="tools-grid">
+              <div class="tool-card" id="openSliderToolBtn">
+                  <div class="tool-icon"><ion-icon name="images-outline"></ion-icon></div>
+                  <h3 data-i18n="tSliderName">ইমেজ স্লাইডার</h3>
+                  <p data-i18n="tSliderDesc">রেসপন্সিভ এবং সোয়াইপ সাপোর্টেড স্লাইডার বানান।</p>
+              </div>
+          </div>
+      </div>
+
+      <div id="sliderToolScreen" class="app-screen">
+          <button class="back-btn" id="backToToolsBtn"><ion-icon name="arrow-back-outline"></ion-icon> <span data-i18n="backBtn">ফিরে যান</span></button>
+          
+          <div class="slider-builder">
+              <div class="builder-form">
+                  <h3 data-i18n="tSliderTitle">ইমেজ স্লাইডার টুল</h3>
+                  
+                  <div class="form-group">
+                      <label data-i18n="tPhotoSize">ফটো সাইজ *</label>
+                      <select id="sliderRatio">
+                          <option value="1/1" data-i18n="szSquare">১:১ (Square)</option>
+                          <option value="16/9" selected data-i18n="szStandard">১৬:৯ (Standard)</option>
+                          <option value="19/9" data-i18n="szCinema">১৯:৯ (Cinematic)</option>
+                          <option value="3/1" data-i18n="szBanner">৩:১ (Banner)</option>
+                          <option value="265/149" data-i18n="szCustom">২৬৫:১৪৯ (Custom)</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label data-i18n="tTotalPhotos">মোট ফটো * (ক্লিক করুন)</label>
+                      <div class="radio-group" id="photoCountGroup">
+                          <label><input type="radio" name="photoCount" value="2"> <span data-i18n="num2">২</span></label>
+                          <label><input type="radio" name="photoCount" value="3"> <span data-i18n="num3">৩</span></label>
+                          <label><input type="radio" name="photoCount" value="4"> <span data-i18n="num4">৪</span></label>
+                          <label><input type="radio" name="photoCount" value="5"> <span data-i18n="num5">৫</span></label>
+                          <label><input type="radio" name="photoCount" value="6"> <span data-i18n="num6">৬</span></label>
+                      </div>
+                  </div>
+
+                  <div id="dynamicInputs"></div>
+
+                  <div class="form-group">
+                      <label data-i18n="tDotAlign">ডট এলাইন *</label>
+                      <div class="radio-group">
+                          <label><input type="radio" name="dotAlign" value="flex-start"> <span data-i18n="tLeft">বাম</span></label>
+                          <label><input type="radio" name="dotAlign" value="center" checked> <span data-i18n="tCenter">মধ্য</span></label>
+                          <label><input type="radio" name="dotAlign" value="flex-end"> <span data-i18n="tRight">ডান</span></label>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label data-i18n="tSlideSpeed">স্লাইড স্পীড লেভেল *</label>
+                      <input type="range" id="slideSpeed" min="1" max="10" value="5">
+                      <span id="speedValue" class="speed-val">৫</span>
+                  </div>
+              </div>
+
+              <div class="builder-preview">
+                  <h3 data-i18n="tLivePreview">লাইভ প্রিভিউ</h3>
+                  <div id="livePreviewContainer" class="preview-box">
+                      <p style="opacity: 0.5;" data-i18n="tPreviewPlaceholder">ফটো সিলেক্ট করে কাজ শুরু করুন...</p>
+                  </div>
+                  
+                  <button id="generateBtn" class="generate-btn" data-i18n="tGenerateCode">✨ জেনারেট কোড</button>
+                  
+                  <div id="codeOutputBox" class="code-output-box" title="কপি করতে ক্লিক করুন">
+                      <span id="typedCode"></span><span class="typewriter-cursor" id="typeCursor"></span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div> <div class="navigation-wrapper">
+      <div class="navigation">
+          <ul>
+              <li class="list active" id="navEditorBtn">
+                  <a href="#">
+                      <span class="icon">
+                          <svg class='line' viewBox='0 0 24 24'><path d='M9.02 2.84004L3.63 7.04004C2.73 7.74004 2 9.23004 2 10.36V17.77C2 20.09 3.89 21.99 6.21 21.99H17.79C20.11 21.99 22 20.09 22 17.78V10.5C22 9.29004 21.19 7.74004 20.2 7.05004L14.02 2.72004C12.62 1.74004 10.37 1.79004 9.02 2.84004Z'></path><path d='M12 17.99V14.99'></path></svg>
+                      </span>
+                      <span class="text" data-i18n="editor">এডিটর</span>
+                  </a>
+              </li>
+              <li class="list" id="navToolsBtn">
+                  <a href="#">
+                      <span class="icon"><ion-icon name="grid-outline"></ion-icon></span>
+                      <span class="text" data-i18n="tools">টুলস</span>
+                  </a>
+              </li>
+              <li class="list" id="menuBtn">
+                  <a href="#">
+                      <span class="icon"><ion-icon name="menu-outline"></ion-icon></span>
+                      <span class="text" data-i18n="menu">মেনু</span>
+                  </a>
+              </li>
+              <div class="indicator"></div>
+          </ul>
+      </div>
+  </div>
+
+  <div class="menu-popup-overlay" id="sheetOverlay"></div>
+  <div class="bottom-sheet" id="bottomSheet">
+      <div class="sheet-header">
+          <h2 data-i18n="settingsTitle">মেনু</h2>
+          <button class="theme-toggle-btn" id="sheetThemeToggle"><ion-icon name="sunny-outline" id="sheetThemeIcon"></ion-icon></button>
+      </div>
+      
+      <div class="menu-item" id="settingsMenuToggle">
+          <span class="icon">
+              <svg class='line' viewBox='0 0 24 24'><path d='M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z'></path><path d='M2 12.8799V11.1199C2 10.0799 2.85 9.21994 3.9 9.21994C5.71 9.21994 6.45 7.93994 5.54 6.36994C5.02 5.46994 5.33 4.29994 6.24 3.77994L7.97 2.78994C8.76 2.31994 9.78 2.59994 10.25 3.38994L10.36 3.57994C11.26 5.14994 12.74 5.14994 13.65 3.57994L13.76 3.38994C14.23 2.59994 15.25 2.31994 16.04 2.78994L17.77 3.77994C18.68 4.29994 18.99 5.46994 18.47 6.36994C17.56 7.93994 18.3 9.21994 20.11 9.21994C21.15 9.21994 22.01 10.0699 22.01 11.1199V12.8799C22.01 13.9199 21.16 14.7799 20.11 14.7799C18.3 14.7799 17.56 16.0599 18.47 17.6299C18.99 18.5399 18.68 19.6999 17.77 20.2199L16.04 21.2099C15.25 21.6799 14.23 21.3999 13.76 20.6099L13.65 20.4199C12.75 18.8499 11.27 18.8499 10.36 20.4199L10.25 20.6099C9.78 21.3999 8.76 21.6799 7.97 21.2099L6.24 20.2199C5.33 19.6999 5.02 18.5299 5.54 17.6299C6.45 16.0599 5.71 14.7799 3.9 14.7799C2.85 14.7799 2 13.9199 2 12.8799Z'></path></svg>
+          </span>
+          <span class="text" data-i18n="tSettings">সেটিংস</span>
+      </div>
+      <div class="settings-panel" id="settingsPanel">
+          <div class="settings-row">
+              <h4 data-i18n="tColor">ক) থিম কালার</h4>
+              <div class="color-palette">
+                  <div class="color-btn" style="background: #ef4444;" data-color="#ef4444"></div>
+                  <div class="color-btn" style="background: #f97316;" data-color="#f97316"></div>
+                  <div class="color-btn" style="background: #eab308;" data-color="#eab308"></div>
+                  <div class="color-btn" style="background: #29fd53;" data-color="#29fd53"></div>
+                  <div class="color-btn" style="background: #3b82f6;" data-color="#3b82f6"></div>
+                  <div class="color-btn" style="background: #6366f1;" data-color="#6366f1"></div>
+                  <div class="color-btn" style="background: #a855f7;" data-color="#a855f7"></div>
+              </div>
+          </div>
+          <div class="settings-row">
+              <h4 data-i18n="tLang">খ) ভাষা</h4>
+              <div class="toggle-group">
+                  <button class="toggle-btn active" id="langBn">বাংলা</button>
+                  <button class="toggle-btn" id="langEn">English</button>
+              </div>
+          </div>
+          <div class="settings-row">
+              <h4 data-i18n="tFont">গ) ফন্ট</h4>
+              <div class="toggle-group">
+                  <button class="toggle-btn active" id="fontHind" data-i18n="fontHindText">হিন্দ শিলিগুড়ি</button>
+                  <button class="toggle-btn" id="fontKalpurush" data-i18n="fontKalText">কালপুরুষ</button>
+              </div>
+          </div>
+      </div>
+
+      <a href="https://asifio.blogspot.com" target="_blank" class="menu-item">
+          <span class="icon"><svg class='line' viewBox='0 0 24 24'><path d='M8.39999 6.5H15.6C19 6.5 19.34 8.09 19.57 10.03L20.47 17.53C20.76 19.99 20 22 16.5 22H7.50999C3.99999 22 3.23999 19.99 3.53999 17.53L4.44 10.03C4.66 8.09 4.99999 6.5 8.39999 6.5Z'></path><path d='M8 8V4.5C8 3 9 2 10.5 2H13.5C15 2 16 3 16 4.5V8'></path><path d='M20.41 17.03H8'></path></svg></span>
+          <span class="text" data-i18n="tAppStore">অ্যাপ স্টোর</span>
+      </a>
+
+      <div class="menu-item" id="aboutBtn">
+          <span class="icon"><svg class='line' viewBox='0 0 24 24'><path d='M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z'></path><path d='M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z'></path></svg></span>
+          <span class="text" data-i18n="tAbout">সম্পর্কে</span>
+      </div>
+  </div>
+
+  <div class="about-modal" id="aboutModal">
+      <h2 data-i18n="aName">আসিফ ইকবাল</h2>
+      <p data-i18n="aDesc">এই অ্যাপটির স্বত্বাধিকারী এবং নির্মাতা।</p>
+      <button id="closeAboutBtn" data-i18n="aClose">বন্ধ করুন</button>
+  </div>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
