@@ -79,10 +79,26 @@ const langEnBtn = document.getElementById('langEn');
 
 const translations = {
     "bn": { 
-        "welcome": "এই অ্যাপে আপনকে স্বাগতম", "canvas": "এখানে ডিজাইন তৈরি করুন...", "editor": "এডিটর", "tools": "টুলস", "menu": "মেনু", "settingsTitle": "মেনু", "tSettings": "সেটিংস", "tColor": "ক) থিম কালার", "tLang": "খ) ভাষা", "tFont": "গ) ফন্ট", "fontHindText": "হিন্দ শিলিগুড়ি", "fontKalText": "কালপুরুষ", "tAppStore": "অ্যাপ স্টোর", "tAbout": "সম্পর্কে", "aName": "আসিফ ইকবাল", "aDesc": "এই অ্যাপটির স্বত্বাধিকারী এবং নির্মাতা।", "aClose": "বন্ধ করুন", "toolsListTitle": "সব টুলস", "toolsListDesc": "আপনার প্রোজেক্টের জন্য প্রয়োজনীয় টুল নির্বাচন করুন", "tSliderName": "ইমেজ স্লাইডার", "tSliderDesc": "রেসপন্সিভ এবং সোয়াইপ সাপোর্টেড স্লাইডার বানান।", "backBtn": "ফিরে যান", "tSliderTitle": "ইমেজ স্লাইডার টুল", "tPhotoSize": "ফটো সাইজ *", "tTotalPhotos": "মোট ফটো * (ক্লিক করুন)", "tDotAlign": "ডট এলাইন *", "tSlideSpeed": "স্লাইড স্পীড লেভেল *", "tLivePreview": "লাইভ প্রিভিউ", "tGenerateCode": "✨ জেনারেট কোড", "szSquare": "১:১ (Square)", "szStandard": "১৬:৯ (Standard)", "szCinema": "১৯:৯ (Cinematic)", "szBanner": "৩:১ (Banner)", "szCustom": "২৬৫:১৪৯ (Custom)", "num2": "২", "num3": "৩", "num4": "৪", "num5": "৫", "num6": "৬", "tLeft": "বাম", "tCenter": "মধ্য", "tRight": "ডান", "tPreviewPlaceholder": "ফটো সিলেক্ট করে কাজ শুরু করুন...", "notiSuccess": "কোড সফলভাবে কপি হয়েছে!", "alertError": "অনুগ্রহ করে সবগুলো 'ফটো লিঙ্ক *' পূরণ করুন।"
+        "welcome": "এই অ্যাপে আপনকে স্বাগতম", "canvas": "এখানে ডিজাইন তৈরি করুন...", "editor": "এডিটর", "tools": "টুলস", "menu": "মেনু", "settingsTitle": "মেনু", "tSettings": "সেটিংস", "tColor": "ক) থিম কালার", "tLang": "খ) ভাষা", "tFont": "গ) ফন্ট", "fontHindText": "হিন্দ শিলিগুড়ি", "fontKalText": "কালপুরুষ", "tAppStore": "অ্যাপ স্টোর", "tAbout": "সম্পর্কে", "aName": "আসিফ ইকবাল", "aDesc": "এই অ্যাপটির স্বত্বাধিকারী এবং নির্মাতা।", "aClose": "বন্ধ করুন", "toolsListTitle": "সব টুলস", "toolsListDesc": "আপনার প্রোজেক্টের জন্য প্রয়োজনীয় টুল নির্বাচন করুন", "tSliderName": "ইমেজ স্লাইডার", "tSliderDesc": "রেসপন্সিভ এবং সোয়াইপ সাপোর্টেড স্লাইডার বানান।", "backBtn": "ফিরে যান", "tSliderTitle": "ইমেজ স্লাইডার টুল", "tPhotoSize": "ফটো সাইজ *", "tTotalPhotos": "মোট ফটো * (ক্লিক করুন)", "tDotAlign": "ডট এলাইন *", "tSlideSpeed": "স্লাইড স্পীড লেভেল *", "tLivePreview": "লাইভ প্রিভিউ", "tGenerateCode": "✨ জেনারেট কোড", "szSquare": "১:১ (Square)", "szStandard": "১৬:৯ (Standard)", "szCinema": "১৯:৯ (Cinematic)", "szBanner": "৩:১ (Banner)", "szCustom": "২৬৫:১৪৯ (Custom)", "num2": "২", "num3": "৩", "num4": "৪", "num5": "৫", "num6": "৬", "tLeft": "বাম", "tCenter": "মধ্য", "tRight": "ডান", "tPreviewPlaceholder": "ফটো সিলেক্ট করে কাজ শুরু করুন...", "notiSuccess": "কোড সফলভাবে কপি হয়েছে!", "alertError": "অনুগ্রহ করে সবগুলো 'ফটো লিঙ্ক *' পূরণ করুন।", "tQuizName": "কুইজ জেনারেটর",
+        "tQuizDesc": "ইন্টারেক্টিভ কুইজ তৈরি ও শেয়ার করুন।",
+        "ask_count": "আপনি কয়টি কুইজ চান?",
+        "btn_start": "শুরু করুন",
+        "live_preview": "লাইভ প্রিভিউ",
+        "btn_generate": "কোড জেনারেট করুন",
+        "btn_reset": "রিসেট করুন",
+        "generated_code": "জেনারেটেড কোড (কপি করতে ক্লিক করুন)"
+        
     },
     "en": { 
-        "welcome": "Welcome to this app", "canvas": "Create your design here...", "editor": "Editor", "tools": "Tools", "menu": "Menu", "settingsTitle": "Menu", "tSettings": "Settings", "tColor": "a) Theme Color", "tLang": "b) Language", "tFont": "c) Font", "fontHindText": "Hind Siliguri", "fontKalText": "Kalpurush", "tAppStore": "App Store", "tAbout": "About", "aName": "Asif Iqbal", "aDesc": "Owner and creator of this app.", "aClose": "Close", "toolsListTitle": "All Tools", "toolsListDesc": "Select the required tool for your project", "tSliderName": "Image Slider", "tSliderDesc": "Create responsive swipe-supported sliders.", "backBtn": "Go Back", "tSliderTitle": "Image Slider Tool", "tPhotoSize": "Photo Size *", "tTotalPhotos": "Total Photos * (Click)", "tDotAlign": "Dot Align *", "tSlideSpeed": "Slide Speed Level *", "tLivePreview": "Live Preview", "tGenerateCode": "✨ Generate Code", "szSquare": "1:1 (Square)", "szStandard": "16:9 (Standard)", "szCinema": "19:9 (Cinematic)", "szBanner": "3:1 (Banner)", "szCustom": "265:149 (Custom)", "num2": "2", "num3": "3", "num4": "4", "num5": "5", "num6": "6", "tLeft": "Left", "tCenter": "Center", "tRight": "Right", "tPreviewPlaceholder": "Select photos to start...", "notiSuccess": "Code copied successfully!", "alertError": "Please fill in all 'Photo Link *' fields."
+        "welcome": "Welcome to this app", "canvas": "Create your design here...", "editor": "Editor", "tools": "Tools", "menu": "Menu", "settingsTitle": "Menu", "tSettings": "Settings", "tColor": "a) Theme Color", "tLang": "b) Language", "tFont": "c) Font", "fontHindText": "Hind Siliguri", "fontKalText": "Kalpurush", "tAppStore": "App Store", "tAbout": "About", "aName": "Asif Iqbal", "aDesc": "Owner and creator of this app.", "aClose": "Close", "toolsListTitle": "All Tools", "toolsListDesc": "Select the required tool for your project", "tSliderName": "Image Slider", "tSliderDesc": "Create responsive swipe-supported sliders.", "backBtn": "Go Back", "tSliderTitle": "Image Slider Tool", "tPhotoSize": "Photo Size *", "tTotalPhotos": "Total Photos * (Click)", "tDotAlign": "Dot Align *", "tSlideSpeed": "Slide Speed Level *",
+        "tLivePreview": "Live Preview", "tGenerateCode": "✨ Generate Code", "szSquare": "1:1 (Square)", "szStandard": "16:9 (Standard)", "szCinema": "19:9 (Cinematic)", "szBanner": "3:1 (Banner)", "szCustom": "265:149 (Custom)", "num2": "2", "num3": "3", "num4": "4", "num5": "5", "num6": "6", "tLeft": "Left", "tCenter": "Center", "tRight": "Right", "tPreviewPlaceholder": "Select photos to start...", "notiSuccess": "Code copied successfully!", "alertError": "Please fill in all 'Photo Link *' fields.", "tQuizName": "Quiz Generator",
+        "tQuizDesc": "Create and share interactive quizzes.",
+        "ask_count": "How many quizzes do you want?",
+        "btn_start": "Start",
+        "live_preview": "Live Preview",
+        "btn_generate": "Generate Code",
+        "btn_reset": "Reset",
+        "generated_code": "Generated Code (Click to copy)"
     }
 };
 
@@ -410,3 +426,252 @@ codeOutputBox.addEventListener('click', () => {
         });
     }
 });
+
+// ============================================
+// --- টুল ২: কুইজ জেনারেটর টুল লজিক ---
+// ============================================
+
+const openQuizToolBtn = document.getElementById('openQuizToolBtn');
+const backToToolsBtnQuiz = document.getElementById('backToToolsBtnQuiz');
+
+// টুল ওপেন এবং ব্যাক করা
+if (openQuizToolBtn) {
+    openQuizToolBtn.addEventListener('click', () => switchScreen('quizToolScreen'));
+}
+if (backToToolsBtnQuiz) {
+    backToToolsBtnQuiz.addEventListener('click', () => switchScreen('toolsScreen'));
+}
+
+let totalQuizzes = 0;
+let quizCodeInterval;
+
+function startQuizBuilder() {
+    const countInput = document.getElementById('quiz-count').value;
+    if (!countInput || countInput < 1) {
+        alert(currentLang === 'bn' ? "অনুগ্রহ করে একটি সঠিক সংখ্যা লিখুন!" : "Please enter a valid number!");
+        return;
+    }
+    totalQuizzes = parseInt(countInput);
+    document.getElementById('quiz-setup-section').style.display = 'none';
+    document.getElementById('quiz-builder-section').style.display = 'block';
+    buildQuizForms();
+}
+
+function buildQuizForms() {
+    const container = document.getElementById('quiz-forms-container');
+    container.innerHTML = '';
+
+    for (let i = 1; i <= totalQuizzes; i++) {
+        const block = document.createElement('div');
+        block.className = 'quiz-block';
+        const labelQ = currentLang === 'bn' ? `${i} নং কুইজ` : `Quiz No. ${i}`;
+        const placeholderQ = currentLang === 'bn' ? `প্রশ্ন: _______` : `Question: _______`;
+        const optTxt = currentLang === 'bn' ? `উত্তর` : `Option`;
+        const ansTxt = currentLang === 'bn' ? `সঠিক উত্তর:` : `Correct Answer:`;
+
+        block.innerHTML = `
+            <label style="font-size:18px; margin-bottom:10px; color: var(--indicator-bg);">${labelQ}</label>
+            <div class="form-group">
+                <input type="text" id="quiz-q-${i}" placeholder="${placeholderQ}" oninput="updateQuizPreview()">
+            </div>
+            <div class="form-group">
+                <input type="text" id="quiz-opt1-${i}" placeholder="${optTxt} ১" oninput="updateQuizPreview()">
+                <input type="text" id="quiz-opt2-${i}" placeholder="${optTxt} ২" oninput="updateQuizPreview()">
+                <input type="text" id="quiz-opt3-${i}" placeholder="${optTxt} ৩" oninput="updateQuizPreview()">
+                <input type="text" id="quiz-opt4-${i}" placeholder="${optTxt} ৪" oninput="updateQuizPreview()">
+            </div>
+            <div class="form-group">
+                <label>${ansTxt}</label>
+                <select id="quiz-ans-${i}" onchange="updateQuizPreview()">
+                    <option value="1">১</option>
+                    <option value="2">২</option>
+                    <option value="3">৩</option>
+                    <option value="4">৪</option>
+                </select>
+            </div>
+        `;
+        container.appendChild(block);
+    }
+    updateQuizPreview();
+}
+
+function updateQuizPreview() {
+    const previewContainer = document.getElementById('quiz-live-preview-content');
+    previewContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalQuizzes; i++) {
+        const q = document.getElementById(`quiz-q-${i}`).value || (currentLang === 'bn' ? `প্রশ্ন ${i}` : `Question ${i}`);
+        const opt1 = document.getElementById(`quiz-opt1-${i}`).value || 'Option 1';
+        const opt2 = document.getElementById(`quiz-opt2-${i}`).value || 'Option 2';
+        const opt3 = document.getElementById(`quiz-opt3-${i}`).value || 'Option 3';
+        const opt4 = document.getElementById(`quiz-opt4-${i}`).value || 'Option 4';
+        const ans = document.getElementById(`quiz-ans-${i}`).value;
+
+        const div = document.createElement('div');
+        div.className = 'quiz-preview-item';
+        div.innerHTML = `
+            <strong style="display:block; margin-bottom:8px; font-size:16px;">${i}. ${q}</strong>
+            <span class="p-opt ${ans == 1 ? 'correct' : ''}">${opt1}</span>
+            <span class="p-opt ${ans == 2 ? 'correct' : ''}">${opt2}</span>
+            <span class="p-opt ${ans == 3 ? 'correct' : ''}">${opt3}</span>
+            <span class="p-opt ${ans == 4 ? 'correct' : ''}">${opt4}</span>
+        `;
+        previewContainer.appendChild(div);
+    }
+}
+
+function generateQuizCode() {
+    let quizDataArray = [];
+    
+    for (let i = 1; i <= totalQuizzes; i++) {
+        const q = document.getElementById(`quiz-q-${i}`).value;
+        const opt1 = document.getElementById(`quiz-opt1-${i}`).value;
+        const opt2 = document.getElementById(`quiz-opt2-${i}`).value;
+        const opt3 = document.getElementById(`quiz-opt3-${i}`).value;
+        const opt4 = document.getElementById(`quiz-opt4-${i}`).value;
+        const ans = parseInt(document.getElementById(`quiz-ans-${i}`).value) - 1;
+
+        if(!q || !opt1 || !opt2 || !opt3 || !opt4) {
+            alert(currentLang === 'bn' ? "দয়া করে সবগুলো ফিল্ড পূরণ করুন!" : "Please fill in all fields!");
+            return;
+        }
+        quizDataArray.push(`{ question: "${q}", options: ["${opt1}", "${opt2}", "${opt3}", "${opt4}"], correct: ${ans} }`);
+    }
+
+    const dataString = `[\n    ${quizDataArray.join(',\n    ')}\n  ]`;
+    
+    const finalHTML = `<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Quiz App</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --indicator-bg: #4a90e2; --bg-color: #f9f9f9; --text-color: #333333; --box-bg: #ffffff; --option-bg: #f0f0f0; --option-border: #4a90e2; --correct-bg: #27ae60; --wrong-bg: #e74c3c; }
+  body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Hind Siliguri', sans-serif; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+  .question-card { background: var(--box-bg); padding: 30px; border-radius: 12px; width: 100%; max-width: 500px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .option-capsule { background: var(--option-bg); border: 2px solid var(--option-border); border-radius: 50px; padding: 15px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; text-align: left; }
+  .option-capsule:hover:not(.disabled) { transform: translateY(-2px); opacity: 0.8; }
+  .option-capsule.correct { background: var(--correct-bg); color: #fff; border-color: var(--correct-bg); }
+  .option-capsule.wrong { background: var(--wrong-bg); color: #fff; border-color: var(--wrong-bg); }
+  .disabled { pointer-events: none; opacity: 0.6; }
+  .progress-bar { height: 8px; background: var(--indicator-bg); width: 0%; transition: 0.3s; margin: 20px 0; border-radius: 4px; }
+  .nav-btn { width: 100%; padding: 12px; border-radius: 50px; border: none; background: var(--indicator-bg); color: #fff; font-size: 16px; cursor: pointer; font-weight: bold; }
+  .nav-btn:disabled { background: #ccc; }
+  .d-none { display: none !important; }
+  .result-item { background: var(--option-bg); padding: 15px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid var(--indicator-bg); text-align: left; }
+</style>
+</head>
+<body>
+
+<div class="question-card" id="quiz-screen">
+  <h3 id="question-text"></h3>
+  <div id="options-container"></div>
+  <div class="progress-bar" id="progress-bar"></div>
+  <button id="next-btn" class="nav-btn" onclick="nextQuestion()" disabled>পরবর্তী</button>
+</div>
+
+<div class="question-card d-none" id="results-screen">
+  <h3 style="margin-top:0;">কুইজ শেষ হয়েছে!</h3>
+  <div id="results-container" style="max-height: 400px; overflow-y: auto; text-align: left; padding-right: 5px;"></div>
+  <button class="nav-btn" style="margin-top: 15px;" onclick="location.reload()">আবার শুরু করুন</button>
+</div>
+
+<script>
+  const quizData = ${dataString};
+  let currentQuestion = 0;
+  let userAnswers = [];
+  
+  function loadQuestion() {
+    const q = quizData[currentQuestion];
+    document.getElementById('question-text').innerText = (currentQuestion + 1) + ". " + q.question;
+    const container = document.getElementById('options-container');
+    container.innerHTML = '';
+    document.getElementById('next-btn').disabled = true;
+    
+    q.options.forEach((opt, index) => {
+      const div = document.createElement('div');
+      div.className = 'option-capsule';
+      div.innerText = opt;
+      div.onclick = () => selectOption(div, index, q.correct);
+      container.appendChild(div);
+    });
+    document.getElementById('progress-bar').style.width = ((currentQuestion / quizData.length) * 100) + '%';
+  }
+
+  function selectOption(el, selected, correct) {
+    if(!document.getElementById('next-btn').disabled) return;
+    const isCorrect = (selected === correct);
+    userAnswers[currentQuestion] = { selected: selected, isCorrect: isCorrect };
+    el.classList.add(isCorrect ? 'correct' : 'wrong');
+    Array.from(el.parentElement.children).forEach(child => child.classList.add('disabled'));
+    document.getElementById('next-btn').disabled = false;
+  }
+
+  function nextQuestion() {
+    currentQuestion++;
+    if(currentQuestion < quizData.length) loadQuestion();
+    else showResults();
+  }
+
+  function showResults() {
+    document.getElementById('quiz-screen').classList.add('d-none');
+    document.getElementById('results-screen').classList.remove('d-none');
+    const container = document.getElementById('results-container');
+    
+    quizData.forEach((q, i) => {
+      const uAns = userAnswers[i];
+      const div = document.createElement('div');
+      div.className = 'result-item';
+      const statusText = uAns.isCorrect ? '<span style="color:var(--correct-bg);font-weight:bold;">সঠিক</span>' : '<span style="color:var(--wrong-bg);font-weight:bold;">ভুল</span>';
+      
+      div.innerHTML = '<h4>' + (i + 1) + '. ' + q.question + '</h4>' +
+                      '<p><strong>তোমার উত্তর:</strong> ' + q.options[uAns.selected] + ' (' + statusText + ')</p>' +
+                      '<p><strong>সঠিক উত্তর:</strong> ' + q.options[q.correct] + '</p>';
+      container.appendChild(div);
+    });
+  }
+
+  loadQuestion();
+<` + `/script>
+</body>
+</html>`;
+
+    document.getElementById('quiz-output-section').style.display = 'block';
+    
+    const codeBox = document.getElementById('quiz-code-box');
+    codeBox.textContent = '';
+    let i = 0;
+    clearInterval(quizCodeInterval); 
+    
+    quizCodeInterval = setInterval(() => {
+        if (i < finalHTML.length) {
+            codeBox.textContent += finalHTML.substring(i, i + 10); 
+            i += 10;
+            codeBox.scrollTop = codeBox.scrollHeight;
+        } else {
+            clearInterval(quizCodeInterval);
+        }
+    }, 5); 
+}
+
+function copyQuizCode() {
+    const codeBox = document.getElementById('quiz-code-box');
+    const textToCopy = codeBox.textContent;
+    if(!textToCopy) return;
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        notiBox.innerText = currentLang === 'bn' ? "কোড সফলভাবে কপি হয়েছে!" : "Code copied successfully!";
+        notiBox.classList.add('show');
+        setTimeout(() => { notiBox.classList.remove('show'); setTimeout(() => notiBox.innerText = translations[currentLang].welcome, 300); }, 2500);
+    });
+}
+
+function resetQuizTool() {
+    document.getElementById('quiz-setup-section').style.display = 'block';
+    document.getElementById('quiz-builder-section').style.display = 'none';
+    document.getElementById('quiz-output-section').style.display = 'none';
+    document.getElementById('quiz-count').value = '';
+    clearInterval(quizCodeInterval);
+}

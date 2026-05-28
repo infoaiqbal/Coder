@@ -26,12 +26,14 @@
 
   <div class="workspace">
       
+      <!-- স্ক্রিন ১: এডিটর -->
       <div id="editorScreen" class="app-screen active">
           <div class="canvas-area">
               <p data-i18n="canvas">এখানে ডিজাইন তৈরি করুন...</p>
           </div>
       </div>
 
+      <!-- স্ক্রিন ২: টুলস তালিকা -->
       <div id="toolsScreen" class="app-screen">
           <div class="tools-header">
               <h2 data-i18n="toolsListTitle">সব টুলস</h2>
@@ -39,14 +41,23 @@
           </div>
           
           <div class="tools-grid">
+              <!-- টুল ১ কার্ড -->
               <div class="tool-card" id="openSliderToolBtn">
                   <div class="tool-icon"><ion-icon name="images-outline"></ion-icon></div>
                   <h3 data-i18n="tSliderName">ইমেজ স্লাইডার</h3>
                   <p data-i18n="tSliderDesc">রেসপন্সিভ এবং সোয়াইপ সাপোর্টেড স্লাইডার বানান।</p>
               </div>
+              
+              <!-- টুল ২ কার্ড -->
+              <div class="tool-card" id="openQuizToolBtn">
+                  <div class="tool-icon"><ion-icon name="help-circle-outline"></ion-icon></div>
+                  <h3 data-i18n="tQuizName">কুইজ জেনারেটর</h3>
+                  <p data-i18n="tQuizDesc">ইন্টারেক্টিভ কুইজ তৈরি ও শেয়ার করুন।</p>
+              </div>
           </div>
       </div>
 
+      <!-- স্ক্রিন ৩: স্লাইডার টুল বিল্ডার -->
       <div id="sliderToolScreen" class="app-screen">
           <button class="back-btn" id="backToToolsBtn"><ion-icon name="arrow-back-outline"></ion-icon> <span data-i18n="backBtn">ফিরে যান</span></button>
           
@@ -109,7 +120,50 @@
           </div>
       </div>
 
-  </div> <div class="navigation-wrapper">
+      <!-- স্ক্রিন ৪: কুইজ জেনারেটর টুল বিল্ডার -->
+      <div id="quizToolScreen" class="app-screen">
+          <button class="back-btn" id="backToToolsBtnQuiz"><ion-icon name="arrow-back-outline"></ion-icon> <span data-i18n="backBtn">ফিরে যান</span></button>
+          
+          <div class="slider-builder" style="justify-content: center;">
+              <div class="builder-form" style="max-width: 800px; width: 100%;">
+                  <h3 data-i18n="tQuizName">কুইজ জেনারেটর টুল</h3>
+
+                  <!-- কুইজ সেটআপ সেকশন -->
+                  <div id="quiz-setup-section">
+                      <div class="form-group">
+                          <label data-i18n="ask_count">আপনি কয়টি কুইজ চান?</label>
+                          <input type="number" id="quiz-count" min="1" placeholder="সংখ্যা লিখুন (উদাঃ 5)">
+                      </div>
+                      <button class="generate-btn" style="display:block;" onclick="startQuizBuilder()" data-i18n="btn_start">শুরু করুন</button>
+                  </div>
+
+                  <!-- কুইজ বিল্ডার ও প্রিভিউ সেকশন -->
+                  <div id="quiz-builder-section" style="display:none;">
+                      <div id="quiz-forms-container"></div>
+                      
+                      <div class="preview-box" style="display:block; padding: 20px; text-align: left; border: 2px dashed var(--indicator-bg);">
+                          <h3 style="margin-top:0; border:none; color: var(--indicator-bg); padding-bottom: 10px; border-bottom: 1px solid var(--shadow);" data-i18n="live_preview">লাইভ প্রিভিউ</h3>
+                          <div id="quiz-live-preview-content"></div>
+                      </div>
+
+                      <div style="display: flex; gap: 15px; margin-top: 20px;">
+                          <button class="generate-btn" style="display:block; flex:1;" onclick="generateQuizCode()" data-i18n="btn_generate">Generate Code</button>
+                          <button class="generate-btn" style="display:block; flex:1; background-color: #e74c3c;" onclick="resetQuizTool()" data-i18n="btn_reset">Reset</button>
+                      </div>
+                  </div>
+
+                  <!-- কুইজ কোড আউটপুট সেকশন -->
+                  <div id="quiz-output-section" style="display:none; margin-top: 20px;">
+                      <h3 data-i18n="generated_code" style="border:none; color: var(--indicator-bg); margin-bottom: 15px;">জেনারেটেড কোড (কপি করতে ক্লিক করুন)</h3>
+                      <div id="quiz-code-box" class="code-output-box" style="display:block; max-height: 250px; overflow-y: auto;" onclick="copyQuizCode()"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div> <!-- End Workspace -->
+
+  <div class="navigation-wrapper">
       <div class="navigation">
           <ul>
               <li class="list active" id="navEditorBtn">
