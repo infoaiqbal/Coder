@@ -205,3 +205,48 @@ input[type="range"] { width: 80%; accent-color: var(--indicator-bg); cursor: poi
 .live-s-icon { display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 50%; background: #f4f6f8; text-decoration: none; transition: 0.3s; }
 .live-s-icon svg { width: 20px; height: 20px; fill: currentColor; }
 .live-btn { display: inline-block; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; padding: 10px 35px; border-radius: 12px; transition: 0.3s; border: 2px solid transparent; }
+
+/* =========================================
+   --- প্লাস বাটন (নতুন লিংক যোগ করুন) স্টাইল ---
+   ========================================= */
+
+.btn-add {
+    background: transparent;
+    border: 2px dashed var(--indicator-bg);
+    color: var(--indicator-bg);
+    padding: 12px 15px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: 'Hind Siliguri', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* আইকন বা টেক্সটের মাঝে ফাঁকা জায়গা */
+}
+
+/* মাউস হোভার করার সময় ইফেক্ট */
+.btn-add:hover {
+    background: var(--indicator-bg);
+    color: var(--bg-color); /* টেক্সট কালার থিমের সাথে মানানসই হবে */
+    border-style: solid;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px); /* হালকা উপরে উঠবে */
+}
+
+/* ডার্ক মোডের জন্য বক্স-শ্যাডো অ্যাডজাস্টমেন্ট */
+[data-theme="dark"] .btn-add:hover {
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.05);
+    color: #000000; /* ডার্ক মোডে হোভার করলে টেক্সট কালো হবে যাতে ভালোভাবে পড়া যায় */
+}
+
+/* বাটন ক্লিক করার সময় ইফেক্ট */
+.btn-add:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
