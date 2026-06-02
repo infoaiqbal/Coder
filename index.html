@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visual Code Crafter</title>
+  <title>Coder</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,10 +54,21 @@
                   <h3 data-i18n="tQuizName">কুইজ জেনারেটর</h3>
                   <p data-i18n="tQuizDesc">ইন্টারেক্টিভ কুইজ তৈরি ও শেয়ার করুন।</p>
               </div>
+              
+              <!-- টুল ৩ কার্ড -->
+              <div class="tool-card" id="openProfileToolBtn">
+                <div class="tool-icon"><ion-icon name="id-card-outline"></ion-icon></div>
+                <h3 data-i18n="tProfileName">প্রোফাইল কার্ড</h3>
+                <p data-i18n="tProfileDesc">সুন্দর সোশ্যাল প্রোফাইল কার্ড তৈরি করুন।</p>
+              </div>
+
+              
+              
+              
           </div>
       </div>
 
-      <!-- স্ক্রিন ৩: স্লাইডার টুল বিল্ডার -->
+      <!-- স্ক্রিন ১: স্লাইডার টুল বিল্ডার -->
       <div id="sliderToolScreen" class="app-screen">
           <button class="back-btn" id="backToToolsBtn"><ion-icon name="arrow-back-outline"></ion-icon> <span data-i18n="backBtn">ফিরে যান</span></button>
           
@@ -120,7 +131,8 @@
           </div>
       </div>
 
-      <!-- স্ক্রিন ৪: কুইজ জেনারেটর টুল বিল্ডার -->
+
+      <!-- স্ক্রিন ২: কুইজ জেনারেটর টুল বিল্ডার -->
       <div id="quizToolScreen" class="app-screen">
           <button class="back-btn" id="backToToolsBtnQuiz"><ion-icon name="arrow-back-outline"></ion-icon> <span data-i18n="backBtn">ফিরে যান</span></button>
           
@@ -160,6 +172,89 @@
               </div>
           </div>
       </div>
+      
+      
+       
+       <!-- স্ক্রিন ৩: প্রোফাইল কার্ড টুল -->
+       <div id="profileToolScreen" class="app-screen">
+       <button class="back-btn" id="backToToolsBtnProfile"><ion-icon name="arrow-back-outline"></ion-icon> <span data-i18n="backBtn">ফিরে যান</span></button>
+    
+       <div class="slider-builder">
+        <!-- ফর্ম এরিয়া -->
+        <div class="builder-form">
+            <h3 data-i18n="tProfileName">প্রোফাইল কার্ড জেনারেটর</h3>
+            
+            <div class="form-group">
+                <label data-i18n="pLogo">লোগো / প্রোফাইল ছবি লিংক</label>
+                <input type="url" id="profileInpLogo" placeholder="https://..." value="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGV_XaM_p1_waHPT2ZgSgQLvPGvGBUcbhUPj-_ZUM4JqvCgv8BpVS0cCTM-8xGOq8vG3bJVgavZ1OAX84sPhrwfre2bGcNu0CajEDjONIlaP1EE3-yxC4BPWyehzZpZzsQXa3WuXUBVmMUTdZgCI1vCdd0qKEwXe6_Li6KtK-NX5qJal2NLC2ik3ENGG5w/s1070/1000013342.jpg">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="pName">আপনার নাম</label>
+                <input type="text" id="profileInpName" placeholder="উদাঃ আসিফ ইকবাল" value="আসিফ ইকবাল">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="pBio">আপনার সম্পর্কে (Bio)</label>
+                <input type="text" id="profileInpBio" placeholder="উদাঃ আমি একজন ছাত্র..." value="আমি একজন ছাত্র, নাশিদ শিল্পী, ডিজাইনার ও অ্যাপ ডেভেলপার">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="pSocials">সোশ্যাল লিংকস</label>
+                <div id="profileSocialLinksContainer"></div>
+                <button class="generate-btn" style="background: transparent; border: 2px dashed var(--indicator-bg); color: var(--indicator-bg);" id="profileAddSocialBtn" data-i18n="pAddLink">+ নতুন লিংক যোগ করুন</button>
+            </div>
+
+            <div class="form-group" style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label data-i18n="pIconColor">আইকন কালার</label>
+                    <div class="color-picker-box">
+                        <input type="color" id="profileInpIconColor" value="#333333">
+                        <input type="text" id="profileHexIconColor" class="color-text-input" value="#333333" maxlength="7">
+                    </div>
+                </div>
+                <div style="flex: 1;">
+                    <label data-i18n="pIconHover">আইকন হোভার কালার</label>
+                    <div class="color-picker-box">
+                        <input type="color" id="profileInpIconHoverColor" value="#000000">
+                        <input type="text" id="profileHexIconHoverColor" class="color-text-input" value="#000000" maxlength="7">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="pBtnText">বাটন টেক্সট</label>
+                <input type="text" id="profileInpBtnText" value="খুলুন">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="pBtnLink">বাটন লিংক</label>
+                <input type="url" id="profileInpBtnLink" value="https://Asifio.blogspot.com">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="pBtnColor">বাটন কালার</label>
+                <div class="color-picker-box" style="width: 50%;">
+                    <input type="color" id="profileInpBtnColor" value="#000000">
+                    <input type="text" id="profileHexBtnColor" class="color-text-input" value="#000000" maxlength="7">
+                </div>
+            </div>
+        </div>
+
+        <!-- প্রিভিউ ও আউটপুট -->
+        <div class="builder-preview">
+            <h3 data-i18n="live_preview">লাইভ প্রিভিউ</h3>
+            <div class="preview-box" id="profileLivePreviewBox" style="background: #e0e5ec;"></div>
+            
+            <button id="profileGenerateBtn" class="generate-btn" data-i18n="btn_generate">✨ জেনারেট কোড</button>
+            
+            <div id="profileCodeOutputBox" class="code-output-box" title="ক্লিক করে কপি করুন" style="display: none; border: 2px solid var(--indicator-bg);"></div>
+        </div>
+    </div>
+</div>
+
+       
+       
 
   </div> <!-- End Workspace -->
 

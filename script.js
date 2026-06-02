@@ -86,7 +86,8 @@ const translations = {
         "live_preview": "লাইভ প্রিভিউ",
         "btn_generate": "কোড জেনারেট করুন",
         "btn_reset": "রিসেট করুন",
-        "generated_code": "জেনারেটেড কোড (কপি করতে ক্লিক করুন)"
+        "generated_code": "জেনারেটেড কোড (কপি করতে ক্লিক করুন)","tProfileName": "প্রোফাইল কার্ড","tProfileDesc": "সুন্দর সোশ্যাল প্রোফাইল কার্ড তৈরি করুন।","pLogo": "লোগো / প্রোফাইল ছবি লিংক","pName": "আপনার নাম","pBio": "আপনার সম্পর্কে (Bio)","pSocials": "সোশ্যাল লিংকস","pAddLink": "+ নতুন লিংক যোগ করুন","pIconColor": "আইকন কালার","pIconHover": "আইকন হোভার কালার","pBtnText": "বাটন টেক্সট","pBtnLink": "বাটন লিংক","pBtnColor": "বাটন কালার"
+
         
     },
     "en": { 
@@ -98,7 +99,8 @@ const translations = {
         "live_preview": "Live Preview",
         "btn_generate": "Generate Code",
         "btn_reset": "Reset",
-        "generated_code": "Generated Code (Click to copy)"
+        "generated_code": "Generated Code (Click to copy)","tProfileName": "Profile Card","tProfileDesc": "Create beautiful social profile cards.","pLogo": "Logo / Profile Picture Link","pName": "Your Name","pBio": "About You (Bio)","pSocials": "Social Links","pAddLink": "+ Add New Link","pIconColor": "Icon Color","pIconHover": "Icon Hover Color","pBtnText": "Button Text","pBtnLink": "Button Link","pBtnColor": "Button Color"
+
     }
 };
 
@@ -422,7 +424,6 @@ codeOutputBox.addEventListener('click', () => {
         navigator.clipboard.writeText(typedCode.textContent).then(() => {
             notiBox.innerText = translations[currentLang].notiSuccess;
             notiBox.classList.add('show');
-            setTimeout(() => { notiBox.classList.remove('show'); setTimeout(() => notiBox.innerText = translations[currentLang].welcome, 300); }, 2500);
         });
     }
 });
@@ -674,4 +675,258 @@ function resetQuizTool() {
     document.getElementById('quiz-output-section').style.display = 'none';
     document.getElementById('quiz-count').value = '';
     clearInterval(quizCodeInterval);
+}
+
+
+
+// ============================================
+// --- টুল ৩: প্রোফাইল কার্ড জেনারেটর লজিক ---
+// ============================================
+
+const openProfileToolBtn = document.getElementById('openProfileToolBtn');
+const backToToolsBtnProfile = document.getElementById('backToToolsBtnProfile');
+
+if (openProfileToolBtn) {
+    openProfileToolBtn.addEventListener('click', () => switchScreen('profileToolScreen'));
+}
+if (backToToolsBtnProfile) {
+    backToToolsBtnProfile.addEventListener('click', () => switchScreen('toolsScreen'));
+}
+
+const profileIconsDB = {
+    "facebook": '<svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>',
+    "youtube": '<svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.636 2.636 0 0 0-1.85-1.864C18.093 3.88 12 3.88 12 3.88s-6.093 0-7.732.442a2.636 2.636 0 0 0-1.85 1.864C2 7.842 2 12 2 12s0 4.158.418 5.814a2.636 2.636 0 0 0 1.85 1.864C5.907 20.12 12 20.12 12 20.12s6.093 0 7.732-.442a2.636 2.636 0 0 0 1.85-1.864C22 16.158 22 12 22 12s0-4.158-.418-5.814zM9.99 15.46V8.54L15.93 12l-5.94 3.46z"/></svg>',
+    "instagram": '<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>',
+    "telegram": '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.43.91-4.04 2.67-.38.26-.73.39-1.05.38-.35-.01-1.03-.2-1.53-.36-.61-.2-1.1-.31-1.06-.66.02-.18.27-.37.75-.56 2.94-1.28 4.9-2.13 5.88-2.54 2.79-1.17 3.37-1.37 3.75-1.38.08 0 .27.02.39.12.1.08.13.19.14.28-.01.05.01.17 0 .2z"/></svg>',
+    "whatsapp": '<svg viewBox="0 0 24 24"><path d="M12.031 0C5.398 0 0 5.398 0 12.031c0 2.128.556 4.195 1.611 6.012L.175 23.473l5.59-1.465A11.968 11.968 0 0 0 12.031 24c6.632 0 12.03-5.399 12.03-12.031C24.062 5.398 18.663 0 12.031 0zm3.896 17.202c-.595.342-1.636.57-2.311.597-.565.022-1.32-.132-3.327-.92-2.417-1.035-3.957-3.523-4.076-3.682-.12-.158-.973-1.296-.973-2.47 0-1.175.606-1.752.822-1.99.215-.237.472-.296.632-.296.16 0 .318 0 .456.007.142.008.332-.054.52.398.192.457.653 1.597.712 1.716.06.12.1.259.02.417-.08.158-.12.257-.238.396-.118.139-.248.297-.355.405-.12.119-.244.248-.11.478.134.23 .597.986 1.282 1.597.882.787 1.624 1.03 1.854 1.149.23.12.366.099.504-.059.139-.158.597-.694.757-.932.16-.237.318-.198.527-.12s1.327.625 1.554.743c.228.12.38.178.435.277.054.1.054.575-.247.962z"/></svg>',
+    "email": '<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+    "website": '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>',
+    "twitter": '<svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+    "threads": '<svg viewBox="0 0 24 24"><path d="M14.654 11.666c-.347-.354-.847-.565-1.428-.565-1.028 0-1.84.802-1.84 1.87 0 1.05.807 1.866 1.815 1.866.603 0 1.123-.23 1.48-.606l1.246 1.18c-.687.732-1.642 1.18-2.75 1.18-2.008 0-3.626-1.573-3.626-3.62 0-2.032 1.623-3.618 3.636-3.618 1.487 0 2.658.74 3.266 2.052.203.438.31 1.01.31 1.572v.63h-5.467c.076.953.86 1.66 1.84 1.66.52 0 1.002-.212 1.346-.575l1.173 1.144zm4.457 4.29c-1.026 1.8-2.775 2.766-4.996 2.766-3.238 0-5.772-2.315-5.772-5.753 0-3.415 2.502-5.72 5.75-5.72 3.197 0 5.61 2.233 5.61 5.512v1.5h-9.52c.162 1.65 1.484 2.802 3.176 2.802 1.3 0 2.443-.655 3.013-1.655l1.623.957a5.556 5.556 0 0 1-4.636 2.378c-4.103 0-6.924-2.836-6.924-7.07 0-4.185 2.83-7.11 6.885-7.11 4.102 0 6.845 2.858 6.845 7.152 0 .546-.076 1.13-.242 1.68l1.52-.464c.106-.445.158-.936.158-1.468 0-4.993-3.328-8.68-8.28-8.68-5.06 0-8.583 3.687-8.583 8.78 0 5.06 3.42 8.765 8.412 8.765 2.755 0 5.09-1.26 6.46-3.666l-1.5-1.036z"/></svg>',
+    "linkedin": '<svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>',
+    "tiktok": '<svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 15.68a6.34 6.34 0 0 0 6.27 6.36 6.33 6.33 0 0 0 6.27-6.36v-6.9a8.16 8.16 0 0 0 3.91.99v-3.46a4.84 4.84 0 0 1-1.86-.38z"/></svg>'
+};
+
+const profileCustomOptionsHTML = Object.keys(profileIconsDB).map(key => `
+    <div class="custom-option" data-value="${key}">
+        <div class="opt-icon">${profileIconsDB[key]}</div>
+        <span class="s-name">${key.charAt(0).toUpperCase() + key.slice(1)}</span>
+    </div>
+`).join('');
+
+const profileSocialLinksContainer = document.getElementById('profileSocialLinksContainer');
+let profileSocialCount = 0;
+
+function setupProfileRow(row, platform) {
+    const customSelect = row.querySelector('.custom-select');
+    const inputField = row.querySelector('.social-url');
+    customSelect.setAttribute('data-value', platform);
+    
+    const selectedBox = customSelect.querySelector('.select-selected');
+    selectedBox.innerHTML = `
+        <div class="opt-icon">${profileIconsDB[platform]}</div>
+        <span class="s-name">${platform.charAt(0).toUpperCase() + platform.slice(1)}</span>
+        <span class="arrow">▼</span>
+    `;
+
+    if(platform === 'email') inputField.placeholder = currentLang === 'bn' ? "জিমেইল আইডি দিন" : "Email ID";
+    else if (platform === 'whatsapp') inputField.placeholder = currentLang === 'bn' ? "হোয়াটসঅ্যাপ নাম্বার দিন" : "WhatsApp No.";
+    else inputField.placeholder = currentLang === 'bn' ? "লিংক দিন (https://...)" : "Enter Link (https://...)";
+
+    updateProfileLivePreview();
+}
+
+function addProfileSocialField() {
+    profileSocialCount++;
+    const div = document.createElement('div');
+    div.className = 'profile-social-row';
+    div.innerHTML = `
+        <div class="custom-select" data-value="">
+            <div class="select-selected" onclick="toggleProfileDropdown(this)"></div>
+            <div class="select-items select-hide">${profileCustomOptionsHTML}</div>
+        </div>
+        <input type="text" class="social-url" oninput="updateProfileLivePreview()">
+        ${profileSocialCount > 1 ? `<button class="btn-remove" onclick="this.parentElement.remove(); updateProfileLivePreview();" style="background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s;">✖</button>` : ''}
+    `;
+    profileSocialLinksContainer.appendChild(div);
+    
+    let defPlatform = 'facebook';
+    if(profileSocialCount === 2) defPlatform = 'youtube';
+    else if(profileSocialCount === 3) defPlatform = 'instagram';
+    setupProfileRow(div, defPlatform);
+}
+
+if(profileSocialLinksContainer){
+    addProfileSocialField(); addProfileSocialField(); addProfileSocialField();
+    document.getElementById('profileAddSocialBtn').addEventListener('click', addProfileSocialField);
+
+    profileSocialLinksContainer.addEventListener('click', function(e) {
+        const option = e.target.closest('.custom-option');
+        if(option) {
+            const platform = option.getAttribute('data-value');
+            const row = option.closest('.profile-social-row');
+            setupProfileRow(row, platform);
+            option.closest('.select-items').classList.add('select-hide');
+        }
+    });
+}
+
+function toggleProfileDropdown(el) {
+    document.querySelectorAll('.select-items').forEach(item => {
+        if(item !== el.nextElementSibling) item.classList.add('select-hide');
+    });
+    el.nextElementSibling.classList.toggle('select-hide');
+}
+
+document.addEventListener('click', function(e) {
+    if(!e.target.closest('.custom-select')) {
+        document.querySelectorAll('.select-items').forEach(item => item.classList.add('select-hide'));
+    }
+});
+
+// Color Picker Sync
+function setupProfileColorPicker(pickerId, textId) {
+    const picker = document.getElementById(pickerId);
+    const textInput = document.getElementById(textId);
+    if(!picker) return;
+    
+    picker.addEventListener('input', (e) => {
+        textInput.value = e.target.value.toUpperCase();
+        updateProfileLivePreview();
+    });
+    
+    textInput.addEventListener('input', (e) => {
+        let val = e.target.value.trim();
+        if(val && !val.startsWith('#')) val = '#' + val;
+        if(/^#[0-9A-F]{6}$/i.test(val)) {
+            picker.value = val;
+            updateProfileLivePreview();
+        }
+    });
+}
+setupProfileColorPicker('profileInpIconColor', 'profileHexIconColor');
+setupProfileColorPicker('profileInpIconHoverColor', 'profileHexIconHoverColor');
+setupProfileColorPicker('profileInpBtnColor', 'profileHexBtnColor');
+
+['profileInpLogo', 'profileInpName', 'profileInpBio', 'profileInpBtnText', 'profileInpBtnLink'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('input', updateProfileLivePreview);
+});
+
+function updateProfileLivePreview() {
+    const box = document.getElementById('profileLivePreviewBox');
+    if(!box) return;
+
+    const logo = document.getElementById('profileInpLogo').value;
+    const name = document.getElementById('profileInpName').value || 'আপনার নাম';
+    const bio = document.getElementById('profileInpBio').value || 'আপনার সম্পর্কে...';
+    const iconColor = document.getElementById('profileInpIconColor').value;
+    const btnColor = document.getElementById('profileInpBtnColor').value;
+    const btnText = document.getElementById('profileInpBtnText').value || 'খুলুন';
+
+    let socialHTML = '';
+    document.querySelectorAll('.profile-social-row').forEach(row => {
+        const platform = row.querySelector('.custom-select').getAttribute('data-value');
+        let url = row.querySelector('.social-url').value.trim();
+        if(!url) url = '#';
+        if(platform === 'email' && url !== '#' && !url.startsWith('mailto:')) url = `mailto:${url}`;
+        
+        socialHTML += `<a href="${url}" target="_blank" class="live-s-icon" style="color: ${iconColor};">${profileIconsDB[platform]}</a>`;
+    });
+
+    box.innerHTML = `
+        <div class="live-card">
+            <div class="live-avatar"><img src="${logo}" alt="Logo"></div>
+            <h2 class="live-name">${name}</h2>
+            <p class="live-bio">${bio}</p>
+            <div class="live-social">${socialHTML}</div>
+            <a href="#" class="live-btn" style="background: ${btnColor}; border-color: ${btnColor}; pointer-events:none;">${btnText}</a>
+        </div>
+    `;
+}
+if(document.getElementById('profileLivePreviewBox')) updateProfileLivePreview(); 
+
+// Generate Code Logic
+let profileTypeInterval;
+const profileGenerateBtn = document.getElementById('profileGenerateBtn');
+if(profileGenerateBtn) {
+    profileGenerateBtn.addEventListener('click', () => {
+        const logo = document.getElementById('profileInpLogo').value;
+        const name = document.getElementById('profileInpName').value;
+        const bio = document.getElementById('profileInpBio').value;
+        const iconColor = document.getElementById('profileInpIconColor').value;
+        const iconHoverColor = document.getElementById('profileInpIconHoverColor').value;
+        const btnText = document.getElementById('profileInpBtnText').value;
+        const btnLink = document.getElementById('profileInpBtnLink').value;
+        const btnColor = document.getElementById('profileInpBtnColor').value;
+
+        let socialHTMLCode = '';
+        document.querySelectorAll('.profile-social-row').forEach(row => {
+            const platform = row.querySelector('.custom-select').getAttribute('data-value');
+            let url = row.querySelector('.social-url').value.trim() || '#';
+            if(platform === 'email' && url !== '#' && !url.startsWith('mailto:')) url = `mailto:${url}`;
+            socialHTMLCode += `\n            <!-- ${platform} -->\n            <a href="${url}" target="_blank" class="social-icon">\n                ${profileIconsDB[platform]}\n            </a>`;
+        });
+
+        const finalCode = `<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/infoaiqbal/kalpurush@latest/style.css');
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f4f7f6; font-family: 'Hind Siliguri', sans-serif; }
+        .profile-card { background: #ffffff; width: 100%; max-width: 360px; border-radius: 20px; padding: 60px 25px 35px; position: relative; text-align: center; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); margin: 70px 20px 20px; border: 1px solid rgba(0,0,0,0.05); }
+        .profile-avatar { width: 120px; height: 120px; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); position: absolute; top: -60px; left: 50%; transform: translateX(-50%); background: #fff; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .profile-avatar img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .profile-name { font-family: 'Hind Siliguri', sans-serif; font-size: 26px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; margin-top: 15px; }
+        .profile-bio { font-family: 'Kalpurush', sans-serif !important; font-size: 18px; color: #555555; line-height: 1.5; margin-bottom: 30px; padding: 0 10px; }
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .social-icon { display: flex; justify-content: center; align-items: center; width: 45px; height: 45px; border-radius: 50%; background: #f4f6f8; color: ${iconColor}; text-decoration: none; transition: all 0.3s ease; }
+        .social-icon svg { width: 22px; height: 22px; fill: currentColor; }
+        .social-icon:hover { background: ${iconHoverColor}; color: #ffffff; transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); }
+        .action-btn { display: inline-block; background: ${btnColor}; color: #ffffff; text-decoration: none; font-size: 18px; font-weight: 600; padding: 12px 40px; border-radius: 12px; transition: all 0.3s ease; border: 2px solid ${btnColor}; }
+        .action-btn:hover { background: transparent; color: ${btnColor}; }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <div class="profile-avatar"><img src="${logo}" alt="Logo"></div>
+        <h2 class="profile-name">${name}</h2>
+        <p class="profile-bio">${bio}</p>
+        <div class="social-links">${socialHTMLCode}
+        </div>
+        <a href="${btnLink}" target="_blank" class="action-btn">${btnText}</a>
+    </div>
+</body>
+</html>`;
+
+        const codeBox = document.getElementById('profileCodeOutputBox');
+        codeBox.style.display = 'block';
+        codeBox.textContent = '';
+        clearInterval(profileTypeInterval);
+        let i = 0;
+        profileTypeInterval = setInterval(() => {
+            if (i < finalCode.length) {
+                codeBox.textContent += finalCode.substring(i, i + 15); i += 15;
+                codeBox.scrollTop = codeBox.scrollHeight;
+            } else clearInterval(profileTypeInterval);
+        }, 5);
+    });
+}
+
+const profileCodeOutputBox = document.getElementById('profileCodeOutputBox');
+if(profileCodeOutputBox){
+    profileCodeOutputBox.addEventListener('click', function() {
+        if(this.textContent.length > 20) {
+            navigator.clipboard.writeText(this.textContent).then(() => {
+                notiBox.innerText = translations[currentLang].notiSuccess || "কোড সফলভাবে কপি হয়েছে!";
+                notiBox.classList.add('show');
+                setTimeout(() => { notiBox.classList.remove('show'); setTimeout(() => notiBox.innerText = translations[currentLang].welcome, 300); }, 2500);
+            });
+        }
+    });
 }
