@@ -250,3 +250,35 @@ input[type="range"] { width: 80%; accent-color: var(--indicator-bg); cursor: poi
     transform: translateY(0);
     box-shadow: none;
 }
+
+/* =========================================
+   --- টেবিল জেনারেটর টুল স্পেসিফিক স্টাইল --- 
+   ========================================= */
+
+.dynamic-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px; }
+[data-theme="dark"] .dynamic-row { background: rgba(255,255,255,0.05); }
+.dynamic-row .col-inputs { display: flex; gap: 10px; flex: 1; overflow-x: auto; padding-bottom: 5px;}
+.dynamic-row .col-inputs input { min-width: 120px; margin-bottom: 0 !important; }
+
+.toggle-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; background: rgba(0,0,0,0.05); padding: 10px 15px; border-radius: 8px; border: 1px solid var(--shadow); }
+[data-theme="dark"] .toggle-wrap { background: rgba(255,255,255,0.03); }
+.switch { position: relative; display: inline-block; width: 46px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; transition: .4s; border-radius: 34px; }
+.switch .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+.switch input:checked + .slider { background-color: var(--indicator-bg); }
+.switch input:checked + .slider:before { transform: translateX(22px); }
+
+/* টেবিলের লাইভ প্রিভিউ স্টাইল */
+.gen-table-wrap { overflow-x: auto; background: var(--nav-bg); border: 1px solid var(--shadow); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding-bottom: 5px; }
+.gen-table { width: 100%; border-collapse: collapse; text-align: left; white-space: nowrap; font-size: 15px; color: var(--icon-color); }
+.gen-table th, .gen-table td { border: 1px solid var(--shadow); padding: 12px 16px; }
+.gen-table th { background-color: rgba(0,0,0,0.2); color: var(--indicator-bg); font-weight: 600; text-transform: uppercase; font-size: 14px; }
+
+.gen-table.zebra tbody tr:nth-child(even) { background-color: rgba(0,0,0,0.05); }
+[data-theme="dark"] .gen-table.zebra tbody tr:nth-child(even) { background-color: rgba(255,255,255,0.05); }
+.gen-table tbody tr:hover { background-color: rgba(0,0,0,0.08); }
+[data-theme="dark"] .gen-table tbody tr:hover { background-color: rgba(255,255,255,0.08); }
+
+.gen-table.bounce tbody td { transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+.gen-table.bounce tbody td:active { transform: translateY(-3px) scale(0.98); box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 10; border-color: transparent; background-color: rgba(41, 253, 83, 0.15); }

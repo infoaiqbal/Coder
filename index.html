@@ -63,10 +63,24 @@
               </div>
 
               
+          <!-- টুল ৪ কার্ড -->           
+              <div class="tool-card" id="openTableToolBtn">
+                 <div class="tool-icon"><ion-icon name="grid-outline"></ion-icon></div>
+                 <h3 data-i18n="tTableName">টেবিল জেনারেটর</h3>
+                 <p data-i18n="tTableDesc">রেসপন্সিভ এবং অটো থিম সাপোর্টেড টেবিল তৈরি করুন।</p>
+               </div>
+
+
+
+              
               
               
           </div>
       </div>
+
+
+
+
 
       <!-- স্ক্রিন ১: স্লাইডার টুল বিল্ডার -->
       <div id="sliderToolScreen" class="app-screen">
@@ -249,11 +263,57 @@
             <button id="profileGenerateBtn" class="generate-btn" data-i18n="btn_generate">✨ জেনারেট কোড</button>
             
             <div id="profileCodeOutputBox" class="code-output-box" title="ক্লিক করে কপি করুন" style="display: none; border: 2px solid var(--indicator-bg);"></div>
+          </div>
+        </div>
+      </div>
+
+       
+       
+       <!-- স্ক্রিন ৪: টেবিল জেনারেটর টুল -->
+<div id="tableToolScreen" class="app-screen">
+    <button class="back-btn" id="backToToolsBtnTable"><ion-icon name="arrow-back-outline"></ion-icon> <span data-i18n="backBtn">ফিরে যান</span></button>
+    
+    <div class="slider-builder">
+        <!-- ফর্ম এরিয়া -->
+        <div class="builder-form">
+            <h3 data-i18n="tTableName">টেবিল জেনারেটর</h3>
+
+            <h4 data-i18n="tTblDesign">ডিজাইন সেটিংস (Auto Theme)</h4>
+            <div class="toggle-wrap">
+                <span data-i18n="tZebra">জেব্রা ডিজাইন (Zebra Stripe)</span>
+                <label class="switch">
+                    <input type="checkbox" id="tableToggleZebra" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="toggle-wrap">
+                <span data-i18n="tBounce">বাউন্স ইফেক্ট (Click Jump)</span>
+                <label class="switch">
+                    <input type="checkbox" id="tableToggleBounce" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <h4 data-i18n="tColSetup">১. কলাম সেটআপ</h4>
+            <div id="tableColumnContainer"></div>
+            <button type="button" class="btn-add" id="tableAddColBtn" data-i18n="tAddCol">+ নতুন কলাম যোগ করুন</button>
+
+            <h4 data-i18n="tRowSetup">২. ডেটা (Row) এন্ট্রি</h4>
+            <div id="tableRowContainer"></div>
+            <button type="button" class="btn-add" id="tableAddRowBtn" data-i18n="tAddRow">+ নতুন রো যোগ করুন</button>
+        </div>
+
+        <!-- প্রিভিউ ও আউটপুট -->
+        <div class="builder-preview">
+            <h3 data-i18n="live_preview">লাইভ প্রিভিউ</h3>
+            <div class="preview-box" id="tableLivePreviewBox" style="background: var(--bg-color);"></div>
+            
+            <button id="tableGenerateBtn" class="generate-btn" data-i18n="tGenerateCode">✨ জেনারেট কোড</button>
+            <div id="tableCodeOutputBox" class="code-output-box" title="ক্লিক করে কপি করুন" style="display: none; border: 2px solid var(--indicator-bg);"></div>
         </div>
     </div>
 </div>
 
-       
        
 
   </div> <!-- End Workspace -->

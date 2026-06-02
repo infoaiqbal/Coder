@@ -86,7 +86,7 @@ const translations = {
         "live_preview": "লাইভ প্রিভিউ",
         "btn_generate": "কোড জেনারেট করুন",
         "btn_reset": "রিসেট করুন",
-        "generated_code": "জেনারেটেড কোড (কপি করতে ক্লিক করুন)","tProfileName": "প্রোফাইল কার্ড","tProfileDesc": "সুন্দর সোশ্যাল প্রোফাইল কার্ড তৈরি করুন।","pLogo": "লোগো / প্রোফাইল ছবি লিংক","pName": "আপনার নাম","pBio": "আপনার সম্পর্কে (Bio)","pSocials": "সোশ্যাল লিংকস","pAddLink": "+ নতুন লিংক যোগ করুন","pIconColor": "আইকন কালার","pIconHover": "আইকন হোভার কালার","pBtnText": "বাটন টেক্সট","pBtnLink": "বাটন লিংক","pBtnColor": "বাটন কালার"
+        "generated_code": "জেনারেটেড কোড (কপি করতে ক্লিক করুন)","tProfileName": "প্রোফাইল কার্ড","tProfileDesc": "সুন্দর সোশ্যাল প্রোফাইল কার্ড তৈরি করুন।","pLogo": "লোগো / প্রোফাইল ছবি লিংক","pName": "আপনার নাম","pBio": "আপনার সম্পর্কে (Bio)","pSocials": "সোশ্যাল লিংকস","pAddLink": "+ নতুন লিংক যোগ করুন","pIconColor": "আইকন কালার","pIconHover": "আইকন হোভার কালার","pBtnText": "বাটন টেক্সট","pBtnLink": "বাটন লিংক","pBtnColor": "বাটন কালার","tTableName": "টেবিল জেনারেটর","tTableDesc": "রেসপন্সিভ এবং অটো থিম সাপোর্টেড টেবিল তৈরি করুন।","tTblDesign": "ডিজাইন সেটিংস (Auto Theme)","tZebra": "জেব্রা ডিজাইন (Zebra Stripe)","tBounce": "বাউন্স ইফেক্ট (Click Jump)","tColSetup": "১. কলাম সেটআপ","tAddCol": "+ নতুন কলাম যোগ করুন","tRowSetup": "২. ডেটা (Row) এন্ট্রি","tAddRow": "+ নতুন রো যোগ করুন"
 
         
     },
@@ -99,9 +99,10 @@ const translations = {
         "live_preview": "Live Preview",
         "btn_generate": "Generate Code",
         "btn_reset": "Reset",
-        "generated_code": "Generated Code (Click to copy)","tProfileName": "Profile Card","tProfileDesc": "Create beautiful social profile cards.","pLogo": "Logo / Profile Picture Link","pName": "Your Name","pBio": "About You (Bio)","pSocials": "Social Links","pAddLink": "+ Add New Link","pIconColor": "Icon Color","pIconHover": "Icon Hover Color","pBtnText": "Button Text","pBtnLink": "Button Link","pBtnColor": "Button Color"
+        "generated_code": "Generated Code (Click to copy)","tProfileName": "Profile Card","tProfileDesc": "Create beautiful social profile cards.","pLogo": "Logo / Profile Picture Link","pName": "Your Name","pBio": "About You (Bio)","pSocials": "Social Links","pAddLink": "+ Add New Link","pIconColor": "Icon Color","pIconHover": "Icon Hover Color","pBtnText": "Button Text","pBtnLink": "Button Link","pBtnColor": "Button Color","tTableName": "Table Generator","tTableDesc": "Create responsive auto-theme supported tables.","tTblDesign": "Design Settings (Auto Theme)","tZebra": "Zebra Design (Stripes)","tBounce": "Bounce Effect (Click Jump)","tColSetup": "1. Column Setup","tAddCol": "+ Add New Column","tRowSetup": "2. Data (Row) Entry","tAddRow": "+ Add New Row"
 
-    }
+
+ }
 };
 
 function changeLanguage(lang) {
@@ -921,6 +922,285 @@ if(profileGenerateBtn) {
 const profileCodeOutputBox = document.getElementById('profileCodeOutputBox');
 if(profileCodeOutputBox){
     profileCodeOutputBox.addEventListener('click', function() {
+        if(this.textContent.length > 20) {
+            navigator.clipboard.writeText(this.textContent).then(() => {
+                notiBox.innerText = translations[currentLang].notiSuccess || "কোড সফলভাবে কপি হয়েছে!";
+                notiBox.classList.add('show');
+                setTimeout(() => { notiBox.classList.remove('show'); setTimeout(() => notiBox.innerText = translations[currentLang].welcome, 300); }, 2500);
+            });
+        }
+    });
+}
+
+
+// ============================================
+// --- টুল ৪: টেবিল জেনারেটর লজিক ---
+// ============================================
+
+const openTableToolBtn = document.getElementById('openTableToolBtn');
+const backToToolsBtnTable = document.getElementById('backToToolsBtnTable');
+
+if (openTableToolBtn) openTableToolBtn.addEventListener('click', () => switchScreen('tableToolScreen'));
+if (backToToolsBtnTable) backToToolsBtnTable.addEventListener('click', () => switchScreen('toolsScreen'));
+
+const tablePlaceholderCols = ["ক্রমিক", "নাম", "পদবী", "স্ট্যাটাস"];
+const tablePlaceholderRows = [
+    ["১", "আসিফ ইকবাল", "ওয়েব ডেভেলপার", "সক্রিয়"],
+    ["২", "রাকিব হাসান", "ডিজাইনার", "পেন্ডিং"]
+];
+
+let tableColumns = ["", "", "", ""];
+let tableRows = [
+    ["", "", "", ""],
+    ["", "", "", ""]
+];
+
+const tableColContainer = document.getElementById('tableColumnContainer');
+const tableRowContainer = document.getElementById('tableRowContainer');
+
+function renderTableColumnsUI() {
+    if(!tableColContainer) return;
+    tableColContainer.innerHTML = '';
+    tableColumns.forEach((col, index) => {
+        const phText = currentLang === 'bn' ? (tablePlaceholderCols[index] || `কলাম ${index + 1}`) : `Col ${index + 1}`;
+        const div = document.createElement('div');
+        div.className = 'dynamic-row';
+        div.innerHTML = `
+            <input type="text" value="${col}" placeholder="${currentLang==='bn'?'উদাঃ':'e.g.'} ${phText}" data-ttype="col" data-tindex="${index}">
+            ${tableColumns.length > 1 ? `<button class="btn-remove" onclick="removeTableColumn(${index})">✖</button>` : ''}
+        `;
+        tableColContainer.appendChild(div);
+    });
+    updateTableLivePreview();
+}
+
+function renderTableRowsUI() {
+    if(!tableRowContainer) return;
+    tableRowContainer.innerHTML = '';
+    tableRows.forEach((row, rowIndex) => {
+        const div = document.createElement('div');
+        div.className = 'dynamic-row';
+        
+        let inputsHTML = '<div class="col-inputs">';
+        tableColumns.forEach((col, colIndex) => {
+            let val = row[colIndex] || "";
+            let phText = (tablePlaceholderRows[rowIndex] && tablePlaceholderRows[rowIndex][colIndex]) ? tablePlaceholderRows[rowIndex][colIndex] : (currentLang === 'bn' ? "ডেটা..." : "Data...");
+            inputsHTML += `<input type="text" value="${val}" placeholder="${phText}" data-ttype="cell" data-trow="${rowIndex}" data-tcol="${colIndex}">`;
+        });
+        inputsHTML += '</div>';
+
+        div.innerHTML = `
+            ${inputsHTML}
+            ${tableRows.length > 1 ? `<button class="btn-remove" onclick="removeTableRow(${rowIndex})">✖</button>` : ''}
+        `;
+        tableRowContainer.appendChild(div);
+    });
+    updateTableLivePreview();
+}
+
+const tableAddColBtn = document.getElementById('tableAddColBtn');
+if(tableAddColBtn){
+    tableAddColBtn.addEventListener('click', () => {
+        tableColumns.push("");
+        tableRows.forEach(row => row.push(""));
+        renderTableColumnsUI(); renderTableRowsUI();
+    });
+}
+
+window.removeTableColumn = (index) => {
+    tableColumns.splice(index, 1);
+    tableRows.forEach(row => row.splice(index, 1));
+    renderTableColumnsUI(); renderTableRowsUI();
+};
+
+const tableAddRowBtn = document.getElementById('tableAddRowBtn');
+if(tableAddRowBtn){
+    tableAddRowBtn.addEventListener('click', () => {
+        tableRows.push(new Array(tableColumns.length).fill(""));
+        renderTableRowsUI();
+    });
+}
+
+window.removeTableRow = (index) => {
+    tableRows.splice(index, 1);
+    renderTableRowsUI();
+};
+
+const tableBuilderForm = document.querySelector('#tableToolScreen .builder-form');
+if(tableBuilderForm){
+    tableBuilderForm.addEventListener('input', (e) => {
+        if(e.target.dataset.ttype === 'col') {
+            tableColumns[e.target.dataset.tindex] = e.target.value;
+            renderTableRowsUI(); 
+        }
+        if(e.target.dataset.ttype === 'cell') {
+            tableRows[e.target.dataset.trow][e.target.dataset.tcol] = e.target.value;
+            updateTableLivePreview();
+        }
+    });
+}
+
+const tableToggleZebra = document.getElementById('tableToggleZebra');
+const tableToggleBounce = document.getElementById('tableToggleBounce');
+if(tableToggleZebra) tableToggleZebra.addEventListener('change', updateTableLivePreview);
+if(tableToggleBounce) tableToggleBounce.addEventListener('change', updateTableLivePreview);
+
+function updateTableLivePreview() {
+    const box = document.getElementById('tableLivePreviewBox');
+    if(!box) return;
+
+    const isZebra = tableToggleZebra ? tableToggleZebra.checked : true;
+    const isBounce = tableToggleBounce ? tableToggleBounce.checked : true;
+
+    let thHTML = '';
+    tableColumns.forEach((col, i) => { 
+        let defaultColText = currentLang === 'bn' ? `কলাম ${i + 1}` : `Col ${i + 1}`;
+        let finalCol = col || tablePlaceholderCols[i] || defaultColText;
+        thHTML += `<th>${finalCol}</th>`; 
+    });
+
+    let trHTML = '';
+    tableRows.forEach((row, rIndex) => {
+        trHTML += '<tr>';
+        tableColumns.forEach((col, cIndex) => { 
+            let finalCell = row[cIndex] || (tablePlaceholderRows[rIndex] && tablePlaceholderRows[rIndex][cIndex]) || "-";
+            trHTML += `<td>${finalCell}</td>`; 
+        });
+        trHTML += '</tr>';
+    });
+
+    const tableClasses = `gen-table ${isZebra ? 'zebra' : ''} ${isBounce ? 'bounce' : ''}`;
+    box.innerHTML = `
+        <div class="gen-table-wrap">
+            <table class="${tableClasses}">
+                <thead><tr>${thHTML}</tr></thead>
+                <tbody>${trHTML}</tbody>
+            </table>
+        </div>
+    `;
+}
+
+// Initial render
+renderTableColumnsUI(); 
+renderTableRowsUI();
+
+// Update language dynamically for placeholders
+langEnBtn.addEventListener('click', () => { renderTableColumnsUI(); renderTableRowsUI(); });
+langBnBtn.addEventListener('click', () => { renderTableColumnsUI(); renderTableRowsUI(); });
+
+let tableTypeInterval;
+const tableGenerateBtn = document.getElementById('tableGenerateBtn');
+if(tableGenerateBtn){
+    tableGenerateBtn.addEventListener('click', () => {
+        const isZebra = tableToggleZebra.checked;
+        const isBounce = tableToggleBounce.checked;
+
+        let thHTML = '';
+        tableColumns.forEach((col, i) => { 
+            let finalCol = col || tablePlaceholderCols[i] || `Col ${i + 1}`;
+            thHTML += `\n                    <th>${finalCol}</th>`; 
+        });
+
+        let trHTML = '';
+        tableRows.forEach((row, rIndex) => {
+            trHTML += `\n                <tr>`;
+            tableColumns.forEach((col, cIndex) => { 
+                let finalCell = row[cIndex] || (tablePlaceholderRows[rIndex] && tablePlaceholderRows[rIndex][cIndex]) || "-";
+                trHTML += `\n                    <td>${finalCell}</td>`; 
+            });
+            trHTML += `\n                </tr>`;
+        });
+
+        const cssZebra = isZebra ? `\n        .theme-table.zebra tbody tr:nth-child(even) { background-color: var(--tbl-zebra); }` : ``;
+        const cssBounce = isBounce ? `\n        .theme-table.bounce tbody td { transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .theme-table.bounce tbody td:active { transform: translateY(-3px) scale(0.98); box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 10; border-color: transparent; background-color: var(--tbl-active); }` : ``;
+
+        const finalCode = `<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Theme Table</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tbl-bg: #ffffff;
+            --tbl-text: #333333;
+            --tbl-border: #e0e0e0;
+            --tbl-head-bg: #f4f7f6;
+            --tbl-head-text: #1a1a1a;
+            --tbl-hover: rgba(0, 0, 0, 0.03);
+            --tbl-zebra: rgba(0, 0, 0, 0.04);
+            --tbl-active: rgba(41, 253, 83, 0.1);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --tbl-bg: #223243;
+                --tbl-text: #ffffff;
+                --tbl-border: rgba(255, 255, 255, 0.15);
+                --tbl-head-bg: rgba(0, 0, 0, 0.3);
+                --tbl-head-text: #29fd53;
+                --tbl-hover: rgba(255, 255, 255, 0.05);
+                --tbl-zebra: rgba(0, 0, 0, 0.15);
+                --tbl-active: rgba(41, 253, 83, 0.25);
+            }
+        }
+        [data-theme="dark"] {
+            --tbl-bg: #223243;
+            --tbl-text: #ffffff;
+            --tbl-border: rgba(255, 255, 255, 0.15);
+            --tbl-head-bg: rgba(0, 0, 0, 0.3);
+            --tbl-head-text: #29fd53;
+            --tbl-hover: rgba(255, 255, 255, 0.05);
+            --tbl-zebra: rgba(0, 0, 0, 0.15);
+            --tbl-active: rgba(41, 253, 83, 0.25);
+        }
+
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: var(--tbl-bg); padding: 20px; transition: 0.3s; }
+        
+        .table-wrap { overflow-x: auto; background: var(--tbl-bg); border: 1px solid var(--tbl-border); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding-bottom: 5px; }
+        .theme-table { width: 100%; border-collapse: collapse; text-align: left; white-space: nowrap; font-size: 15px; color: var(--tbl-text); }
+        .theme-table th, .theme-table td { border: 1px solid var(--tbl-border); padding: 12px 16px; }
+        .theme-table th { background-color: var(--tbl-head-bg); color: var(--tbl-head-text); font-weight: 600; text-transform: uppercase; font-size: 14px; }
+        
+        .theme-table tbody tr:hover { background-color: var(--tbl-hover); }${cssZebra}${cssBounce}
+    </style>
+</head>
+<body>
+    <div class="table-wrap">
+        <table class="theme-table ${isZebra ? 'zebra' : ''} ${isBounce ? 'bounce' : ''}">
+            <thead>
+                <tr>${thHTML}
+                </tr>
+            </thead>
+            <tbody>${trHTML}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>`;
+
+        const codeBox = document.getElementById('tableCodeOutputBox');
+        codeBox.style.display = 'block';
+        codeBox.textContent = ''; 
+        clearInterval(tableTypeInterval);
+        
+        let i = 0;
+        tableTypeInterval = setInterval(() => {
+            if (i < finalCode.length) {
+                codeBox.textContent += finalCode.substring(i, i + 15); 
+                i += 15;
+                codeBox.scrollTop = codeBox.scrollHeight; 
+            } else {
+                clearInterval(tableTypeInterval); 
+            }
+        }, 5); 
+    });
+}
+
+const tableCodeOutputBox = document.getElementById('tableCodeOutputBox');
+if(tableCodeOutputBox){
+    tableCodeOutputBox.addEventListener('click', function() {
         if(this.textContent.length > 20) {
             navigator.clipboard.writeText(this.textContent).then(() => {
                 notiBox.innerText = translations[currentLang].notiSuccess || "কোড সফলভাবে কপি হয়েছে!";
